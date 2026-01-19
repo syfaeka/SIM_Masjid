@@ -12,7 +12,7 @@
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.kontraktorkubahmasjid.com/wp-content/uploads/2017/06/Masjid-Agung-Baitul-Hakim-Madiun.png');
             background-size: cover;
             background-position: center;
-            height: 100vh; /* Full layar */
+            height: 100vh;
             color: white;
             display: flex;
             align-items: center;
@@ -292,10 +292,8 @@
             return `${day}-${month}-${year}`;
         }
 
-        // Tampilkan tanggal di layar
         document.getElementById('tanggal-hari-ini').innerText = getTodayDate();
 
-        // Ambil Data dari API Aladhan (Metode 20 = Kemenag RI)
         fetch('https://api.aladhan.com/v1/timingsByCity?city=Madiun&country=Indonesia&method=20')
             .then(response => response.json())
             .then(data => {

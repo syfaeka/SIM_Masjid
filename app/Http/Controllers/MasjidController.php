@@ -10,9 +10,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class MasjidController extends Controller
 {
-    // =========================
     // HALAMAN DEPAN (PUBLIC)
-    // =========================
     public function home()
     {
         $saldoUmum         = $this->hitungSaldo('umum');
@@ -33,9 +31,7 @@ class MasjidController extends Controller
         ));
     }
 
-    // =========================
     // DASHBOARD ADMIN
-    // =========================
     public function index()
     {
         // 1. HITUNG SALDO
@@ -84,9 +80,7 @@ class MasjidController extends Controller
         ));
     }
 
-    // =========================
     // SIMPAN KEGIATAN
-    // =========================
     public function simpanKegiatan(Request $request)
     {
         Kegiatan::create($request->except('_token'));
@@ -99,9 +93,7 @@ class MasjidController extends Controller
         return redirect('/admin')->with('sukses', 'Agenda berhasil dihapus');
     }
 
-    // =========================
     // SIMPAN TRANSAKSI
-    // =========================
     public function simpanUang(Request $request)
     {
         Transaksi::create($request->except('_token'));
@@ -114,9 +106,7 @@ class MasjidController extends Controller
         return redirect('/admin')->with('sukses', 'Data barang disimpan');
     }
 
-    // =========================
     // UPDATE & DELETE
-    // =========================
     public function update(Request $request, $id)
     {
         Transaksi::findOrFail($id)
@@ -131,9 +121,8 @@ class MasjidController extends Controller
         return redirect('/admin')->with('sukses', 'Data berhasil dihapus');
     }
 
-    // =========================
     // CETAK PDF
-    // =========================
+
     public function cetakLaporan()
     {
         $riwayat = Transaksi::orderBy('tanggal', 'desc')->get();
@@ -146,9 +135,7 @@ class MasjidController extends Controller
         return $pdf->download('laporan-keuangan-masjid.pdf');
     }
 
-    // =========================
     // HELPER HITUNG SALDO
-    // =========================
     private function hitungSaldo($kategori)
     {
         $masuk = Transaksi::where('kategori', $kategori)
